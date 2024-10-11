@@ -1,0 +1,53 @@
+version: "3.1"
+
+intents:
+  - check_client
+
+
+
+entities:
+  - person
+
+
+
+
+slots:
+  person:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: person
+  
+  client_email:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+
+
+
+responses:
+
+  utter_ask_name:
+    - text: "Please provide the name of the person you're looking for."
+
+  utter_client_found:
+    - text: "Yes, {person} is our client. Their email is {client_email}."
+
+  utter_client_not_found:
+    - text: "Sorry, {person} is not in our database."
+
+
+
+actions:
+  - action_check_client
+
+
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
